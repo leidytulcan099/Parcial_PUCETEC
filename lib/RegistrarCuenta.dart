@@ -6,17 +6,17 @@ class PaginaRegistro extends StatefulWidget {
 }
 
 class _EstadoPaginaRegistro extends State<PaginaRegistro> {
-  // Controladores
+ 
   TextEditingController controladorCedula = TextEditingController();
   TextEditingController controladorCorreo = TextEditingController();
   TextEditingController controladorContrasena = TextEditingController();
 
-  // Mensajes de error
+  
   String mensajeErrorCedula = '';
   String mensajeErrorCorreo = '';
   String mensajeErrorContrasena = '';
 
-  // Colores
+ 
   Color colorCedula = Colors.black;
   Color colorCorreo = Colors.black;
   Color colorContrasena = Colors.black;
@@ -165,11 +165,11 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
 
             Text(
               'La contraseña debe cumplir con:\n'
-              '• Al menos una letra mayúscula\n'
-              '• Al menos un número\n'
-              '• Al menos un carácter especial (!@#\$&*~%^)\n'
-              '• No tener espacios en blanco\n'
-              '• Contener la secuencia "pucetec"',
+              ' Al menos una letra mayúscula\n'
+              ' Al menos un número\n'
+              ' Al menos un carácter especial (!@#\$&*)\n'
+              ' No tener espacios en blanco\n'
+              ' Contener la secuencia "pucetec"',
               style: TextStyle(fontSize: 14, color: Colors.black54),
             ),
             SizedBox(height: 16),
@@ -210,7 +210,7 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
                       mensajeErrorCorreo.isEmpty &&
                       mensajeErrorContrasena.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Cuenta creada (simulado)')),
+                      SnackBar(content: Text('Cuenta creada')),
                     );
                     print('Cédula: ${controladorCedula.text}');
                     print('Correo: ${controladorCorreo.text}');
