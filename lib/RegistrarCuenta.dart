@@ -6,35 +6,31 @@ class PaginaRegistro extends StatefulWidget {
 }
 
 class _EstadoPaginaRegistro extends State<PaginaRegistro> {
- 
+
   TextEditingController controladorCedula = TextEditingController();
   TextEditingController controladorCorreo = TextEditingController();
   TextEditingController controladorContrasena = TextEditingController();
 
-  
   String mensajeErrorCedula = '';
   String mensajeErrorCorreo = '';
   String mensajeErrorContrasena = '';
 
- 
   Color colorCedula = Colors.black;
   Color colorCorreo = Colors.black;
   Color colorContrasena = Colors.black;
 
- 
+  // Validación de cédula
   void validarCedula() {
     String cedula = controladorCedula.text;
     mensajeErrorCedula = '';
     colorCedula = Colors.black;
 
-   
     if (cedula.length > 10) {
       mensajeErrorCedula = 'El numero de cedula esta incorrecta';
       colorCedula = Colors.red;
       return;
     }
 
-    
     if (cedula.length >= 3) {
       int tercerDigito = int.tryParse(cedula[2]) ?? -1;
       if (tercerDigito >= 6) {
@@ -44,7 +40,6 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
       }
     }
 
-    
     if (cedula.length == 10) {
       int digitoVerificador = int.tryParse(cedula[9]) ?? -1;
       if (!_validarModulo10(cedula.substring(0, 9), digitoVerificador)) {
@@ -60,11 +55,9 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
     for (int i = 0; i < 9; i++) {
       int digito = int.tryParse(primerosNueve[i]) ?? 0;
       if (i % 2 == 0) {
-       
         digito *= 2;
         if (digito >= 10) digito -= 9;
       }
-      
       suma += digito;
     }
     int ultimoDigitoSuma = suma % 10;
@@ -72,16 +65,28 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
     return verificadorCalculado == digitoVerificador;
   }
 
-  
+ 
   void validarCorreo() {
-    String correo = controladorCorreo.text;
+    String correo = controladorCorreo.text.trim();
     mensajeErrorCorreo = '';
     colorCorreo = Colors.black;
 
-    if (!RegExp(r'^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$').hasMatch(correo)) {
+    bool formatoValido = RegExp(
+      r"^[a-zA-Z0-9]+([._%+-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+$"
+    ).hasMatch(correo);
+
+    if (!formatoValido) {
       mensajeErrorCorreo = '• El correo no tiene un formato válido';
       colorCorreo = Colors.red;
+      return;
     }
+
+  
+    if (correo.toLowerCase() == 'test@pucesi.edu.ec') {
+      return;
+    }
+
+    
   }
 
  
@@ -119,8 +124,8 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           
 
+            
             TextField(
               controller: controladorCedula,
               keyboardType: TextInputType.number,
@@ -140,8 +145,7 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
               ),
             SizedBox(height: 16),
 
-            
-
+           
             TextField(
               controller: controladorCorreo,
               keyboardType: TextInputType.emailAddress,
@@ -161,8 +165,6 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
               ),
             SizedBox(height: 16),
 
-            
-
             Text(
               'La contraseña debe cumplir con:\n'
               ' Al menos una letra mayúscula\n'
@@ -175,7 +177,6 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
             SizedBox(height: 16),
 
             
-
             TextField(
               controller: controladorContrasena,
               obscureText: true,
@@ -199,7 +200,6 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  
                   validarCedula();
                   validarCorreo();
                   validarContrasena();
@@ -230,4 +230,3 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
     );
   }
 }
-
