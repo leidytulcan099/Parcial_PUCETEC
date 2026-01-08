@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'RegistrarCuenta.dart'; // importamos la pantalla de registro
+import 'RegistrarCuenta.dart'; 
 
 void main() {
   runApp(MiApp());
@@ -10,7 +10,7 @@ class MiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App de Registro',
-      home: PaginaRegistro(), // Abrimos la página de registro
+      home: PaginaRegistro(),
     );
   }
 }
