@@ -19,7 +19,7 @@ class _EstadoPaginaRegistro extends State<PaginaRegistro> {
   Color colorCorreo = Colors.black;
   Color colorContrasena = Colors.black;
 
-  // Validación de cédula
+
   void validarCedula() {
     String cedula = controladorCedula.text;
     mensajeErrorCedula = '';
